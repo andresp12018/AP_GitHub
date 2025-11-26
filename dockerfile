@@ -1,12 +1,14 @@
-FROM python:3.11-slim
-
+# IMAGEN BASE
+FROM edisonpaul4/super-imagen-base:1
+# INSTRUCCIONES
 WORKDIR /app
 
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+RUN echo "Ejecutando instrucciones adicionales..."
+# Copiar el archivo de la aplicación
+COPY app.py .
 
-COPY . /app
+# Exponer el puerto 3000
+EXPOSE 3000
 
-EXPOSE 8000
-
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# ENTRYPOINT
+CMD ["python", "app.py"]
